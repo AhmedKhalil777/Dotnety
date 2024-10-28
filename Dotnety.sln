@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dotnety.App", "src\Dotnety.App\Dotnety.App.csproj", "{B450BB4F-F7F8-4E1D-A471-A1A5DA4274DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnety.Models", "src\Dotnety.Models\Dotnety.Models.csproj", "{BFA8ABB3-FE81-41B0-9EC9-77140C9DE0C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B450BB4F-F7F8-4E1D-A471-A1A5DA4274DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B450BB4F-F7F8-4E1D-A471-A1A5DA4274DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B450BB4F-F7F8-4E1D-A471-A1A5DA4274DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B450BB4F-F7F8-4E1D-A471-A1A5DA4274DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFA8ABB3-FE81-41B0-9EC9-77140C9DE0C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFA8ABB3-FE81-41B0-9EC9-77140C9DE0C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFA8ABB3-FE81-41B0-9EC9-77140C9DE0C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFA8ABB3-FE81-41B0-9EC9-77140C9DE0C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEB1CDF5-ED22-4300-8EE1-2161CC7561E6}
+	EndGlobalSection
+EndGlobal

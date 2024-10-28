@@ -1,0 +1,75 @@
+﻿@page "/admin/connections"
+
+<MudTable ServerData="ServerReload" Dense="true" Hover="true" @ref="table">
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Connections</MudText>
+        <MudSpacer />
+        <MudIconButton  Icon="@Icons.Material.Filled.Add" Color="Color.Primary" ></MudIconButton>
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh><MudTableSortLabel SortLabel="Id" T="Connection">Id</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortLabel="ConnectionName" T="Connection">ConnectionName</MudTableSortLabel></MudTh>
+    </HeaderContent>
+    <RowTemplate>
+        <MudTd DataLabel="Id">@context.Id</MudTd>
+        <MudTd DataLabel="ConnectionName">@context.ConnectionName</MudTd>>
+    </RowTemplate>
+    <NoRecordsContent>
+        <MudText>No matching records found</MudText>
+    </NoRecordsContent>
+    <LoadingContent>
+        <MudText>Loading...</MudText>
+    </LoadingContent>
+    <PagerContent>
+        <MudTablePager />
+    </PagerContent>
+</MudTable>
+
+
+@code {
+    private IEnumerable<Connection> pagedData;
+    private MudTable<Connection> table;
+
+    private int totalItems;
+    private string searchString = null;
+
+    /// <summary>
+    /// Here we simulate getting the paged, filtered and ordered data from the server
+    /// </summary>
+    private async Task<TableData<Connection>> ServerReload(TableState state, CancellationToken token)
+    {
+        IEnumerable<Connection> data = await DotnetyContext.Connections.ToListAsync(token);
+        await Task.Delay(300, token);
+        data = data.Where(element =>
+        {
+            if (string.IsNullOrWhiteSpace(searchString))
+                return true;
+            if (element.Id.ToString() == searchString )
+                return true;
+            if (element.ConnectionName.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+                return true;
+            return false;
+        }).ToArray();
+        totalItems = data.Count();
+        switch (state.SortLabel)
+        {
+            case "Id":
+                data = data.OrderByDirection(state.SortDirection, o => o.Id);
+                break;
+            case "ConnectionName":
+                data = data.OrderByDirection(state.SortDirection, o => o.ConnectionName);
+                break;
+        }
+
+        pagedData = data.Skip(state.Page * state.PageSize).Take(state.PageSize).ToArray();
+        return new TableData<Connection>() { TotalItems = totalItems, Items = pagedData };
+    }
+
+    private void OnSearch(string text)
+    {
+        searchString = text;
+        table.ReloadServerData();
+    }
+}
